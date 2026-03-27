@@ -6,10 +6,12 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
 
     private Node head;
     private Node tail;
+    private int size;
 
     public SinglyLinkedList() {
         head = null;
         tail = null;
+        size = 0;
     }
 
     @Override
@@ -24,7 +26,7 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
         } else {
             head = newNode;
         }
-
+        this.size++;
     }
 
     @Override
@@ -39,42 +41,104 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
             tail.next = newNode; // 2
             tail = newNode; // 3
         }
-
+        this.size++;
     }
 
     @Override
     public E pollFirst() {
-        return null;
+
+        E element;
+
+        if (head == null) {
+            element = null; // 1
+        } else {
+            element = head.element; // 1
+
+            if (head == tail) { // 4
+                head = null;
+                tail = null;
+            } else {
+                Node next = head.next; // 2
+                head.next = null; // 3
+                head = next; // 4
+            }
+        }
+        this.size--;
+        return element;
     }
 
     @Override
     public E pollLast() {
-        return null;
+
+        E element;
+
+        if (tail == null) {
+            element = null;
+        } else {
+            element = tail.element; // 1
+
+            if (head == tail) { // 3
+                head = null;
+                tail = null;
+            } else {
+                Node current = head;
+                Node previous = head;
+                while (current != tail) {
+                    previous = current; // 2
+                    current = current.next; // 2
+                }
+                tail = previous; // 3
+                tail.next = null; // 4
+            }
+        }
+        this.size--;
+        return element;
     }
 
     @Override
     public E peekFirst() {
-        return null;
+        return this.head.element;
     }
 
     @Override
     public E peekLast() {
-        return null;
+        return this.tail.element;
     }
 
     @Override
     public void clear() {
 
+        Node current = head;
+        while (current != null) {
+            Node next = current.next;
+            current.next = null; // breaks reference
+            current = next;
+        }
+        head = null;
+        tail = null;
+        this.size = 0;
     }
 
     @Override
     public boolean contains(E element) {
-        return false;
+
+        boolean contains = false;
+
+        Node current = head;
+        while (current != null) {
+           if(current.element.equals(element)) {
+               contains = true;
+               break;
+           }
+           current = current.next;
+        }
+
+        return contains;
     }
 
     @Override
     public int size() {
-        return 0;
+        return this.size;
     }
 
     @Override

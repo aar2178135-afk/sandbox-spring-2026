@@ -20,5 +20,30 @@ public class Driver {
 
         System.out.println(linkedList);
 
+        System.out.println("First: " + linkedList.peekFirst());
+        System.out.println("Last: " + linkedList.peekLast());
+
+        System.out.println(linkedList.pollFirst());
+
+        System.out.println(linkedList);
+
+        System.out.println(linkedList.pollLast());
+
+        System.out.println(linkedList);
+
+        System.out.println(linkedList.contains("Four"));
+        System.out.println(linkedList.contains("Nine"));
+        System.out.println(linkedList.contains("Ten"));
+
+        System.out.println(linkedList.size());
+
+        linkedList.clear();
+
+        System.out.println(linkedList.size());
+
+        System.out.println(linkedList);
+
+
+
     }
 }
